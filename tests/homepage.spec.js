@@ -26,10 +26,17 @@ test.describe('GitHub Homepage Tests', () => {
     await expect(homePage.optionsText).toEqual(homePage.expectedOptions);
   });
 
-  test('Verify new issue modal opens when clicking on new issue option', async ({ page }) => {
+  test.only('Verify creating a new issue', async ({ page }) => {
     await page.waitForTimeout(2000);
     await homePage.clickOnCreateNewIcon();
     await homePage.clickOnNewIssueOption();
+    await page.waitForTimeout(2000);
+    await homePage.clickOnBlankIssueBtn();
+    await homePage.enterTitle('Test Issue Title');
+    await homePage.enterDescription('Test Issue Description');
+    await homePage.clickOnCreateBtn();
+    await page.waitForTimeout(4000);
+    await expect(homePage.issueName).toHaveText('Test Issue Title');
     await page.waitForTimeout(2000);
   });
 

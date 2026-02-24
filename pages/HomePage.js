@@ -7,6 +7,11 @@ class HomePage extends BasePage {
     this.createNewIcon = page.locator("//button[contains(@aria-labelledby,'global-create-menu-tooltip')]");
     this.menuOptions = page.locator("//*[contains(@aria-labelledby,'global-create-menu-tooltip')]//*[@role='menuitem']//*[contains(@class,'ActionList-ItemLabel')]");
     this.newIssueOption = page.locator("//*[@role='menuitem']//following::*[contains(text(),'New issue')]");
+    this.blankIssueBtn = page.locator("(//a[contains(@class,'ActionList-ActionListContent')])[1]");
+    this.newIssueTitle = page.getByPlaceholder('Title');
+    this.newIssueDescription = page.getByPlaceholder('Type your description here…');
+    this.createBtn = page.getByTestId('create-issue-button');
+    this.issueName = page.getByTestId('issue-title');
 
   }
 
@@ -26,10 +31,27 @@ class HomePage extends BasePage {
     console.log('Expected Options:', expectedOptions);
     }
 
-    async clickOnNewIssueOption() {
-      await this.newIssueOption.waitFor({ state: 'visible' });
-      await this.newIssueOption.click();
-    }
+async clickOnNewIssueOption() {
+  await this.newIssueOption.click();
+}
+
+async clickOnBlankIssueBtn() {
+  await this.blankIssueBtn.click();
+}
+
+async enterTitle(title) {
+  await this.newIssueTitle.fill(title);
+}
+
+async enterDescription(description) {
+  return this.newIssueDescription.fill(description);
+}
+
+async clickOnCreateBtn() {
+  await this.createBtn.click();
+
+}
+
 }
 
 module.exports = { HomePage };
