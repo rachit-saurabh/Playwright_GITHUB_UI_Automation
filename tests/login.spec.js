@@ -12,16 +12,16 @@ test.describe('GitHub Login Tests', () => {
     );
     await expect(page).toHaveURL(/github.com/);
   }); 
-  // ✅ Properly closed beforeEach
 
-  test('@smoke Verify profile icon is visible after login', async ({ page }) => {
+  test('Verify profile icon is visible after login', async ({ page }) => {
     const profileIcon = page.getByTestId('github-avatar');
     await expect(profileIcon).toBeVisible();
   });
 
-  test('@smoke Verify search bar is visible after login', async ({ page }) => {
+  test('Verify search bar is visible after login', async ({ page }) => {
     const searchBar = page.getByText('Type ');
     await expect(searchBar).toBeVisible();
   });
 
 });
+

@@ -4,7 +4,7 @@ class BasePage {
     this.page = page;
   }
 
-  async navigate(path = 'https://github.com/login') {
+  async navigate(path = '') {
     await this.page.goto(path);
   }
 

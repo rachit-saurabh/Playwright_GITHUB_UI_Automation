@@ -8,7 +8,6 @@ class LoginPage extends BasePage {
     this.usernameInput = page.locator('#login_field');
     this.passwordInput = page.locator('#password');
     this.signInButton = page.locator('input[type="submit"]');
-    this.errorMessage = page.locator('#js-flash-container');
   }
 
   async gotoLoginPage() {
