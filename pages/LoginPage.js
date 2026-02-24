@@ -16,7 +16,11 @@ class LoginPage extends BasePage {
 
   async login(username, password) {
     await this.fill(this.usernameInput, username);
-    await this.fill(this.passwordInput, password);
+    // Mask password in report
+  await this.passwordInput.fill('********');
+  await this.passwordInput.evaluate((el, value) => {
+    el.value = value;
+  }, password);
     await this.click(this.signInButton);
   }
 
