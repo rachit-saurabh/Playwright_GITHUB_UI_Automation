@@ -7,11 +7,17 @@ class HomePage extends BasePage {
     this.createNewIcon = page.locator("//button[contains(@aria-labelledby,'global-create-menu-tooltip')]");
     this.menuOptions = page.locator("//*[contains(@aria-labelledby,'global-create-menu-tooltip')]//*[@role='menuitem']//*[contains(@class,'ActionList-ItemLabel')]");
     this.newIssueOption = page.locator("//*[@role='menuitem']//following::*[contains(text(),'New issue')]");
+    this.newRepositoryOption = page.locator("//*[@role='menuitem']//following::*[contains(text(),'New repository')]");
     this.blankIssueBtn = page.locator("(//a[contains(@class,'ActionList-ActionListContent')])[1]");
     this.newIssueTitle = page.getByPlaceholder('Title');
     this.newIssueDescription = page.getByPlaceholder('Type your description here…');
     this.createBtn = page.getByTestId('create-issue-button');
     this.issueName = page.getByTestId('issue-title');
+    this.repoNameInputField = page.locator('#repository-name-input');
+    this.repoDescriptionInputField = page.locator("//input[@name='Description']");
+    this.createRepoBtn = page.locator("//span[text()='Create repository']");
+    this.issuesIcon = page.locator("//a[@data-component='IconButton' and @href='/issues']");
+    this.pullRequestIcon = page.locator("//a[@data-component='IconButton' and @href='/pulls']");
 
   }
 
@@ -52,6 +58,34 @@ async clickOnCreateBtn() {
 
 }
 
+async clickOnNewRepositoryOption() {
+  await this.newRepositoryOption.click();
+
 }
 
+async enterRepositoryName(repoName) {
+  await this.repoNameInputField.fill(repoName);
+}
+
+async enterRepositoryDescription(repoDescription) {
+  await this.repoDescriptionInputField.scrollIntoViewIfNeeded();
+  await this.repoDescriptionInputField.fill(repoDescription);
+
+}
+
+async clickOnCreateRepositoryBtn() {
+  await this.createRepoBtn.scrollIntoViewIfNeeded();
+  await this.createRepoBtn.click();
+
+}
+
+async clickOnIssuesIcon() {
+  await this.issuesIcon.click();
+
+}
+
+async clickOnPullRequestIcon() {
+  await this.pullRequestIcon.click();
+}
+}
 module.exports = { HomePage };

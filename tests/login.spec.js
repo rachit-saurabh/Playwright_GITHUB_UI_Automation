@@ -13,6 +13,9 @@ test.describe('GitHub Login Tests', () => {
     await expect(page).toHaveURL(/github.com/);
   }); 
 
+  //Test Case 1: Verify profile icon is visible after login
+  //Test Case 2: Verify search bar is visible after login
+
   test('Verify profile icon is visible after login', async ({ page }) => {
     const profileIcon = page.getByTestId('github-avatar');
     await expect(profileIcon).toBeVisible();
