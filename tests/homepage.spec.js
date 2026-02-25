@@ -22,11 +22,14 @@ test.describe('GitHub Homepage Tests', () => {
     await expect(page).toHaveURL(/github.com/);
   });
 
+  //HomePage Test Cases:-
   //Test Case 1: Verify options available in create new dropdown
-  //Test Case 2: Verify creating a new issue
-  //Test Case 3: Verify creating a new Repository
-  //Test Case 4: Verify Issues landing page
-  //Test Case 5: Verify pull request landing page
+  //Test Case 2: Verify creating a new issue from create new dropdown
+  //Test Case 3: Verify creating a new Repository from create new dropdown
+  //Test Case 4: Verify Issues landing page from homepage
+  //Test Case 5: Verify pull request landing page from homepage
+  //Test Case 6: Verify creating a new Repository from New Button
+  //Test Case 7: Verify Logout functionality from homepage
 
   test('Verify options available in create new dropdown', async ({ page }) => {
     await page.waitForTimeout(2000);
@@ -90,6 +93,18 @@ test('Verify creating a new Repository from New Button', async ({ page }) => {
     await homePage.clickOnCreateRepositoryBtn();
     await page.waitForTimeout(4000);
     await expect(page).toHaveURL(new RegExp(`${repoName1}$`));
+
+  });
+
+  test.only('Verify Logout functionality', async ({ page }) => {
+    await page.waitForTimeout(2000);
+    await homePage.clickOnAvatarIcon();
+    await homePage.clickOnSignOutBtn();
+    await page.waitForTimeout(2000);
+    await expect(page).toHaveURL(/github.com\/logout/);
+    await homePage.clickOnSignOutConfirmationBtn();
+    await page.waitForTimeout(4000);
+    await expect(page).toHaveURL(/github.com/);
   });
 
 });

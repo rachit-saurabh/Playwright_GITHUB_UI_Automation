@@ -24,6 +24,9 @@ class HomePage extends BasePage {
     this.homePageHamburgerMenuIcon = page.locator("//button[@data-component='IconButton' and @aria-haspopup='dialog']");
     this.homeOptionHamburgerMenuOption = page.locator("//span[contains(@class,'ActionListSubContent')]//span[contains(text(),'Home')]"); 
     this.findRepositoryInputField = page.locator("#dashboard-repos-filter-left");
+    this.avatarIcon = page.getByTestId('github-avatar');
+    this.signOutBtn = page.locator("//span[contains(text(),'Sign out')]");
+    this.signOutConfirmationBtn = page.getByLabel("Sign out of rachit-saurabh");
 
   }
 
@@ -106,5 +109,19 @@ async clickOnHomePageHamburgerMenuIcon() {
 async clickOnHomeOptionInHamburgerMenu() {
   await this.homeOptionHamburgerMenuOption.click();
 }
+
+async clickOnAvatarIcon() {
+  await this.avatarIcon.click();
+}
+
+async clickOnSignOutBtn() {
+  await this.signOutBtn.click();
+
+}
+
+async clickOnSignOutConfirmationBtn() {
+  await this.signOutConfirmationBtn.click();
+}
+
 }
 module.exports = { HomePage };
