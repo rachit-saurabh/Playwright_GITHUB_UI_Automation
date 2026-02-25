@@ -1,4 +1,6 @@
 const { BasePage } = require('./BasePage');
+const repoData = require('../test-data/testDataRepo.json');
+const { generateUniqueName } = require('../utils/testDataHelper');
 
 class HomePage extends BasePage {
 
@@ -18,6 +20,10 @@ class HomePage extends BasePage {
     this.createRepoBtn = page.locator("//span[text()='Create repository']");
     this.issuesIcon = page.locator("//a[@data-component='IconButton' and @href='/issues']");
     this.pullRequestIcon = page.locator("//a[@data-component='IconButton' and @href='/pulls']");
+    this.newBtn = page.locator("(//span[@class='Button-label' and contains(text(),'New')])[1]");
+    this.homePageHamburgerMenuIcon = page.locator("//button[@data-component='IconButton' and @aria-haspopup='dialog']");
+    this.homeOptionHamburgerMenuOption = page.locator("//span[contains(@class,'ActionListSubContent')]//span[contains(text(),'Home')]"); 
+    this.findRepositoryInputField = page.locator("#dashboard-repos-filter-left");
 
   }
 
@@ -86,6 +92,19 @@ async clickOnIssuesIcon() {
 
 async clickOnPullRequestIcon() {
   await this.pullRequestIcon.click();
+}
+
+async clickOnNewBtn() {
+  await this.newBtn.click();
+}
+
+async clickOnHomePageHamburgerMenuIcon() {
+  await this.homePageHamburgerMenuIcon.click();
+
+}
+
+async clickOnHomeOptionInHamburgerMenu() {
+  await this.homeOptionHamburgerMenuOption.click();
 }
 }
 module.exports = { HomePage };

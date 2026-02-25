@@ -1,8 +1,14 @@
 const { test, expect } = require('@playwright/test');
 const { HomePage } = require('../pages/HomePage');
 const { LoginPage } = require('../pages/LoginPage');
+const repoData = require('../test-data/testDataRepo.json');
+const { generateUniqueName } = require('../utils/testDataHelper');
 
 test.describe('GitHub Homepage Tests', () => {
+
+  function generateUniqueName(prefix) {
+  return `${prefix}-${Date.now()}`;
+}
 
   let homePage;
 
@@ -24,7 +30,7 @@ test.describe('GitHub Homepage Tests', () => {
   //Test Case 3: Verify creating a new Repository
   //Test Case 4: Verify Issues landing page
   //Test Case 5: Verify pull request landing page
-  
+
   test('Verify options available in create new dropdown', async ({ page }) => {
     await page.waitForTimeout(2000);
     await homePage.clickOnCreateNewIcon();
@@ -38,11 +44,12 @@ test.describe('GitHub Homepage Tests', () => {
     await homePage.clickOnNewIssueOption();
     await page.waitForTimeout(2000);
     await homePage.clickOnBlankIssueBtn();
-    await homePage.enterTitle('Test Issue Title');
-    await homePage.enterDescription('Test Issue Description');
+    const issueName1 = generateUniqueName(repoData.issueName);
+    await homePage.enterTitle(issueName1);
+    await homePage.enterDescription(repoData.issueDescription);
     await homePage.clickOnCreateBtn();
     await page.waitForTimeout(4000);
-    await expect(homePage.issueName).toHaveText('Test Issue Title');
+    await expect(homePage.issueName).toHaveText(issueName1);
     await page.waitForTimeout(2000);
   });
 
@@ -51,12 +58,13 @@ test.describe('GitHub Homepage Tests', () => {
     await homePage.clickOnCreateNewIcon();
     await homePage.clickOnNewRepositoryOption();
     await page.waitForTimeout(2000);
-    await homePage.enterRepositoryName('Test Repository Name');
-    await homePage.enterRepositoryDescription('Test Repository Description');
+    const repoName1 = generateUniqueName(repoData.repoName);
+    await homePage.enterRepositoryName(repoName1);
+    await homePage.enterRepositoryDescription(repoData.repoDescription);
     await page.waitForTimeout(2000);
     await homePage.clickOnCreateRepositoryBtn();
     await page.waitForTimeout(4000);
-     await expect(page).toHaveURL(/.*\/Test-Repository-Name$/);
+    await expect(page).toHaveURL(new RegExp(`${repoName1}$`));
   });
 
 test('Verify Issues landing page', async ({ page }) => {
@@ -67,12 +75,24 @@ test('Verify Issues landing page', async ({ page }) => {
 
 });
 
-test.only('Verify pull request landing page', async ({ page }) => {
+test('Verify pull request landing page', async ({ page }) => {
     await page.waitForTimeout(2000);
     await homePage.clickOnPullRequestIcon();
     await page.waitForTimeout(4000);
     await expect(page).toHaveURL(/.*\/pulls/);
 
 });
+
+test('Verify creating a new Repository from New Button', async ({ page }) => {
+    await homePage.clickOnNewBtn();
+    await page.waitForTimeout(2000);
+    const repoName1 = generateUniqueName(repoData.repoName);
+    await homePage.enterRepositoryName(repoName1);
+    await homePage.enterRepositoryDescription(repoData.repoDescription);
+    await page.waitForTimeout(2000);
+    await homePage.clickOnCreateRepositoryBtn();
+    await page.waitForTimeout(4000);
+    await expect(page).toHaveURL(new RegExp(`${repoName1}$`));
+  });
 
 });

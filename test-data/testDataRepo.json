@@ -1,0 +1,6 @@
+{
+  "issueName": "Test_Issue",  
+  "repoName": "Test_Repository",
+  "repoDescription": "This is a test repository created by Playwright automation script.",
+  "issueDescription": "This issue is created by automation."
+}
