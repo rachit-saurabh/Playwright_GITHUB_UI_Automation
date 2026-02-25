@@ -1,8 +1,11 @@
 const { test, expect } = require('@playwright/test');
 const { LoginPage } = require('../pages/LoginPage');
+const repoData = require('../test-data/testDataRepo.json');
+const { generateUniqueName } = require('../utils/testDataHelper');
 
 test.describe('GitHub Login Tests', () => {
 
+//Login before each test in this block to ensure we are on the homepage for all tests  
   test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.gotoLoginPage();

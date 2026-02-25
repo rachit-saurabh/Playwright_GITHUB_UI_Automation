@@ -6,12 +6,9 @@ const { generateUniqueName } = require('../utils/testDataHelper');
 
 test.describe('GitHub Homepage Tests', () => {
 
-  function generateUniqueName(prefix) {
-  return `${prefix}-${Date.now()}`;
-}
-
   let homePage;
 
+  // Login before each test in this block to ensure we are on the homepage for all tests
   test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
     homePage = new HomePage(page);
