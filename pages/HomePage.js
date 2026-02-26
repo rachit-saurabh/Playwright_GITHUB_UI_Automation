@@ -6,6 +6,8 @@ class HomePage extends BasePage {
 
   constructor(page) {
     super(page);
+
+  
     this.createNewIcon = page.locator("//button[contains(@aria-labelledby,'global-create-menu-tooltip')]");
     this.menuOptions = page.locator("//*[contains(@aria-labelledby,'global-create-menu-tooltip')]//*[@role='menuitem']//*[contains(@class,'ActionList-ItemLabel')]");
     this.newIssueOption = page.locator("//*[@role='menuitem']//following::*[contains(text(),'New issue')]");

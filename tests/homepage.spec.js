@@ -32,13 +32,16 @@ test.describe('GitHub Homepage Tests', () => {
   //Test Case 7: Verify Logout functionality from homepage
 
   test('Verify options available in create new dropdown', async ({ page }) => {
+    const loginPage = new LoginPage(page);
     await page.waitForTimeout(2000);
     await homePage.clickOnCreateNewIcon();
     await page.waitForTimeout(2000);
     await expect(homePage.optionsText).toEqual(homePage.expectedOptions);
+    await loginPage.takeScreenshot('create-new-dropdown-options');
   });
 
   test('Verify creating a new issue', async ({ page }) => {
+    const loginPage = new LoginPage(page);
     await page.waitForTimeout(2000);
     await homePage.clickOnCreateNewIcon();
     await homePage.clickOnNewIssueOption();
@@ -50,10 +53,12 @@ test.describe('GitHub Homepage Tests', () => {
     await homePage.clickOnCreateBtn();
     await page.waitForTimeout(4000);
     await expect(homePage.issueName).toHaveText(issueName1);
+    await loginPage.takeScreenshot('new-issue-created');
     await page.waitForTimeout(2000);
   });
 
   test('Verify creating a new Repository', async ({ page }) => {
+    const loginPage = new LoginPage(page);
     await page.waitForTimeout(2000);
     await homePage.clickOnCreateNewIcon();
     await homePage.clickOnNewRepositoryOption();
@@ -65,25 +70,31 @@ test.describe('GitHub Homepage Tests', () => {
     await homePage.clickOnCreateRepositoryBtn();
     await page.waitForTimeout(4000);
     await expect(page).toHaveURL(new RegExp(`${repoName1}$`));
+    await loginPage.takeScreenshot('new-repo-created');
   });
 
 test('Verify Issues landing page', async ({ page }) => {
+  const loginPage = new LoginPage(page);
     await page.waitForTimeout(2000);
     await homePage.clickOnIssuesIcon();
     await page.waitForTimeout(4000);
     await expect(page).toHaveURL(/.*\/issues\/assigned/);
+    await loginPage.takeScreenshot('issues-landing-page');
 
 });
 
 test('Verify pull request landing page', async ({ page }) => {
+  const loginPage = new LoginPage(page);
     await page.waitForTimeout(2000);
     await homePage.clickOnPullRequestIcon();
     await page.waitForTimeout(4000);
     await expect(page).toHaveURL(/.*\/pulls/);
+    await loginPage.takeScreenshot('pull-request-landing-page');
 
 });
 
 test('Verify creating a new Repository from New Button', async ({ page }) => {
+  const loginPage = new LoginPage(page);
     await homePage.clickOnNewBtn();
     await page.waitForTimeout(2000);
     const repoName1 = generateUniqueName(repoData.repoName);
@@ -93,10 +104,12 @@ test('Verify creating a new Repository from New Button', async ({ page }) => {
     await homePage.clickOnCreateRepositoryBtn();
     await page.waitForTimeout(4000);
     await expect(page).toHaveURL(new RegExp(`${repoName1}$`));
+    await loginPage.takeScreenshot('new-repo-created-from-new-btn');
 
   });
 
-  test.only('Verify Logout functionality', async ({ page }) => {
+  test('Verify Logout functionality', async ({ page }) => {
+    const loginPage = new LoginPage(page);
     await page.waitForTimeout(2000);
     await homePage.clickOnAvatarIcon();
     await homePage.clickOnSignOutBtn();
@@ -105,6 +118,7 @@ test('Verify creating a new Repository from New Button', async ({ page }) => {
     await homePage.clickOnSignOutConfirmationBtn();
     await page.waitForTimeout(4000);
     await expect(page).toHaveURL(/github.com/);
+    await loginPage.takeScreenshot('logout-success');
   });
 
 });
