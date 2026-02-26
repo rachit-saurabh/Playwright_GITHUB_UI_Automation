@@ -18,10 +18,10 @@ class LoginPage extends BasePage {
     await this.fill(this.usernameInput, username);
     // Mask password in report
   await this.passwordInput.fill('********');
-  await this.passwordInput.evaluate((el, value) => {
-    el.value = value;
-  }, password);
-    await this.click(this.signInButton);
+  await this.passwordInput.evaluate((el, value) => {el.value = value;}, password);
+  await this.click(this.signInButton);
+  await this.takeScreenshot('login-attempt');
+
   }
 
 }

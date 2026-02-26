@@ -4,10 +4,14 @@ const { LoginPage } = require('../pages/LoginPage');
 const repoData = require('../test-data/testDataRepo.json');
 const { generateUniqueName } = require('../utils/testDataHelper');
 
+//A describe block is used to group related tests together.
+//Now all tests inside automatically get the login step.
+//Without describe, you’d repeat login in every test.
 test.describe('GitHub Homepage Tests', () => {
 
   let homePage;
 
+  // beforeEach is a setup hook that runs before every test inside a describe block.
   // Login before each test in this block to ensure we are on the homepage for all tests
   test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
@@ -37,7 +41,6 @@ test.describe('GitHub Homepage Tests', () => {
     await homePage.clickOnCreateNewIcon();
     await page.waitForTimeout(2000);
     await expect(homePage.optionsText).toEqual(homePage.expectedOptions);
-    await loginPage.takeScreenshot('create-new-dropdown-options');
   });
 
   test('Verify creating a new issue', async ({ page }) => {
@@ -53,7 +56,6 @@ test.describe('GitHub Homepage Tests', () => {
     await homePage.clickOnCreateBtn();
     await page.waitForTimeout(4000);
     await expect(homePage.issueName).toHaveText(issueName1);
-    await loginPage.takeScreenshot('new-issue-created');
     await page.waitForTimeout(2000);
   });
 
@@ -70,7 +72,6 @@ test.describe('GitHub Homepage Tests', () => {
     await homePage.clickOnCreateRepositoryBtn();
     await page.waitForTimeout(4000);
     await expect(page).toHaveURL(new RegExp(`${repoName1}$`));
-    await loginPage.takeScreenshot('new-repo-created');
   });
 
 test('Verify Issues landing page', async ({ page }) => {
@@ -79,7 +80,6 @@ test('Verify Issues landing page', async ({ page }) => {
     await homePage.clickOnIssuesIcon();
     await page.waitForTimeout(4000);
     await expect(page).toHaveURL(/.*\/issues\/assigned/);
-    await loginPage.takeScreenshot('issues-landing-page');
 
 });
 
@@ -89,7 +89,6 @@ test('Verify pull request landing page', async ({ page }) => {
     await homePage.clickOnPullRequestIcon();
     await page.waitForTimeout(4000);
     await expect(page).toHaveURL(/.*\/pulls/);
-    await loginPage.takeScreenshot('pull-request-landing-page');
 
 });
 
@@ -104,7 +103,6 @@ test('Verify creating a new Repository from New Button', async ({ page }) => {
     await homePage.clickOnCreateRepositoryBtn();
     await page.waitForTimeout(4000);
     await expect(page).toHaveURL(new RegExp(`${repoName1}$`));
-    await loginPage.takeScreenshot('new-repo-created-from-new-btn');
 
   });
 
@@ -118,7 +116,6 @@ test('Verify creating a new Repository from New Button', async ({ page }) => {
     await homePage.clickOnSignOutConfirmationBtn();
     await page.waitForTimeout(4000);
     await expect(page).toHaveURL(/github.com/);
-    await loginPage.takeScreenshot('logout-success');
   });
 
 });
