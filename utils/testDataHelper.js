@@ -1,3 +1,7 @@
 exports.generateUniqueName = (prefix) => {
-  return `${prefix}-${Date.now()}`;
+  const formatted = new Date()
+    .toLocaleString('en-IN', { hour12: false })
+    .replace(/[/:, ]/g, '-');
+
+  return `${prefix}-${formatted}`;
 };

@@ -30,8 +30,17 @@ class BasePage {
 }
 
   async takeScreenshot(name) {
-    await this.page.screenshot({
-      path: `test-results/${name}-${Date.now()}.png`,fullPage: true});
+  const formatted = new Date()
+    .toLocaleString('en-IN', {
+      timeZone: 'Asia/Kolkata',
+      hour12: false
+    })
+    .replace(/[/:, ]/g, '-');
+
+  await this.page.screenshot({
+    path: `test-results/${name}-${formatted}.png`,
+    fullPage: true
+  });
 }
 
   async waitForVisible(locator) {
