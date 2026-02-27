@@ -43,7 +43,7 @@ test.describe('GitHub Homepage Tests', () => {
     await expect(homePage.optionsText).toEqual(homePage.expectedOptions);
   });
 
-  test.only('Verify creating a new issue', async ({ page }) => {
+  test('Verify creating a new issue', async ({ page }) => {
     const loginPage = new LoginPage(page);
     await page.waitForTimeout(3000);
     await homePage.clickOnCreateNewIcon();

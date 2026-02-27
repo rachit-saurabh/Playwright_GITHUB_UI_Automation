@@ -33,8 +33,8 @@ class HomePage extends BasePage {
   }
 
   async clickOnCreateNewIcon() {
-    await this.createNewIcon.waitFor({ state: 'visible' });
-    await this.createNewIcon.click();
+    await this.waitForVisible(this.createNewIcon);
+    await this.click(this.createNewIcon);
     const optionsCount = await this.menuOptions.count();
     const optionsText = [];
     for (let i = 0; i < optionsCount; i++) 
@@ -80,13 +80,13 @@ async enterRepositoryName(repoName) {
 }
 
 async enterRepositoryDescription(repoDescription) {
-  await this.repoDescriptionInputField.scrollIntoViewIfNeeded();
+  await this.scrollIntoView(this.repoDescriptionInputField);
   await this.fill(this.repoDescriptionInputField, repoDescription);
 
 }
 
 async clickOnCreateRepositoryBtn() {
-  await this.createRepoBtn.scrollIntoViewIfNeeded();
+  await this.scrollIntoView(this.createRepoBtn);
   await this.click(this.createRepoBtn);
 
 }
