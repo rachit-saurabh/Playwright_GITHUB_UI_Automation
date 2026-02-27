@@ -43,12 +43,12 @@ test.describe('GitHub Homepage Tests', () => {
     await expect(homePage.optionsText).toEqual(homePage.expectedOptions);
   });
 
-  test('Verify creating a new issue', async ({ page }) => {
+  test.only('Verify creating a new issue', async ({ page }) => {
     const loginPage = new LoginPage(page);
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(3000);
     await homePage.clickOnCreateNewIcon();
     await homePage.clickOnNewIssueOption();
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(4000);
     await homePage.clickOnBlankIssueBtn();
     const issueName1 = generateUniqueName(repoData.issueName);
     await homePage.enterTitle(issueName1);

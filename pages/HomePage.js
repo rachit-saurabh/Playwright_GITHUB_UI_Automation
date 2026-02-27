@@ -49,80 +49,81 @@ class HomePage extends BasePage {
     }
 
 async clickOnNewIssueOption() {
-  await this.newIssueOption.click();
+  await this.click(this.newIssueOption);
 }
 
 async clickOnBlankIssueBtn() {
-  await this.blankIssueBtn.click();
+  await this.click(this.blankIssueBtn);
 }
 
 async enterTitle(title) {
-  await this.newIssueTitle.fill(title);
+  await this.fill(this.newIssueTitle, title);
 }
 
 async enterDescription(description) {
-  return this.newIssueDescription.fill(description);
+  return this.fill(this.newIssueDescription, description);
 }
 
 async clickOnCreateBtn() {
-  await this.createBtn.click();
+  await this.click(this.createBtn);
 
 }
 
 async clickOnNewRepositoryOption() {
-  await this.newRepositoryOption.click();
+  await this.click(this.newRepositoryOption);
+
 
 }
 
 async enterRepositoryName(repoName) {
-  await this.repoNameInputField.fill(repoName);
+  await this.fill(this.repoNameInputField, repoName);
 }
 
 async enterRepositoryDescription(repoDescription) {
   await this.repoDescriptionInputField.scrollIntoViewIfNeeded();
-  await this.repoDescriptionInputField.fill(repoDescription);
+  await this.fill(this.repoDescriptionInputField, repoDescription);
 
 }
 
 async clickOnCreateRepositoryBtn() {
   await this.createRepoBtn.scrollIntoViewIfNeeded();
-  await this.createRepoBtn.click();
+  await this.click(this.createRepoBtn);
 
 }
 
 async clickOnIssuesIcon() {
-  await this.issuesIcon.click();
+  await this.click(this.issuesIcon);
 
 }
 
 async clickOnPullRequestIcon() {
-  await this.pullRequestIcon.click();
+  await this.click(this.pullRequestIcon);
 }
 
 async clickOnNewBtn() {
-  await this.newBtn.click();
+  await this.click(this.newBtn);
 }
 
 async clickOnHomePageHamburgerMenuIcon() {
-  await this.homePageHamburgerMenuIcon.click();
+  await this.click(this.homePageHamburgerMenuIcon);
 
 }
 
 async clickOnHomeOptionInHamburgerMenu() {
-  await this.homeOptionHamburgerMenuOption.click();
+  await this.click(this.homeOptionHamburgerMenuOption);
 }
 
 async clickOnAvatarIcon() {
-  await this.avatarIcon.click();
+  await this.click(this.avatarIcon);
 }
 
 async clickOnSignOutBtn() {
-  await this.signOutBtn.click();
+  await this.click(this.signOutBtn);
 
 }
 
 async clickOnSignOutConfirmationBtn() {
-  await this.signOutConfirmationBtn.click();
+  await this.click(this.signOutConfirmationBtn);
 }
 
 }

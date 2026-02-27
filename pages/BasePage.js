@@ -79,7 +79,7 @@ async rightClick(locator) {
   await locator.click({ button: 'right' });
 }
 
-async hover(locator) {
+async hover(locator){
   await locator.hover();
 }
 
