@@ -30,3 +30,12 @@ test.describe('GitHub Login Tests', () => {
 
 });
 
+test('Verify failed login with invalid credentials', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    await loginPage.gotoLoginPage();
+    await loginPage.login(process.env.GITHUB_INVALID_USERNAME, process.env.GITHUB_INVALID_PASSWORD);
+    const errorMessage = page.getByText('Incorrect username or password.');
+    await expect(errorMessage).toBeVisible();
+  });
+
+
